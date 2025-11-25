@@ -1,0 +1,11 @@
+./reconcillation.sh -s source/pubg.csv -t destination/pubg.csv -k Id "," -H 1
+
+
+
+----------------------------------------------------------------------------------------------------
+
+https://www.kaggle.com/competitions/pubg-finish-placement-prediction/data?select=train_V2.csv
+
+
+
+

@@ -1,0 +1,21 @@
+log_users_20251002_201017:INFO:2025-10-02 20:10:17,282:Given configurations are: mapping_file_path=mapping.csv | source_query=chunk2.csv | target_query=chunk3.csv
+log_users_20251002_201017:INFO:2025-10-02 20:10:17,282:Checking the path exists or not
+log_users_20251002_201017:INFO:2025-10-02 20:10:17,282:Done
+log_users_20251002_201017:INFO:2025-10-02 20:10:17,293:Checking the Missing values in mapping file
+log_users_20251002_201017:INFO:2025-10-02 20:10:17,293:No null values in the mapping file
+log_users_20251002_201017:INFO:2025-10-02 20:10:17,293:Checking PrimaryKey availability in the mapping file
+log_users_20251002_201017:INFO:2025-10-02 20:10:17,293:Primary key(s) are available in the file
+log_users_20251002_201017:INFO:2025-10-02 20:10:17,346:Checking mapped columns ['identifierHash', 'type', 'country', 'language', 'socialNbFollowers', 'socialNbFollows', 'socialProductsLiked', 'productsListed', 'productsSold', 'productsPassRate', 'productsWished', 'productsBought', 'gender', 'civilityGenderId', 'civilityTitle', 'hasAnyApp', 'hasAndroidApp', 'hasIosApp', 'hasProfilePicture', 'daysSinceLastLogin', 'seniority', 'seniorityAsMonths', 'seniorityAsYears', 'countryCode'] are present in dataset columns
+log_users_20251002_201017:INFO:2025-10-02 20:10:17,346:Column validations are done
+log_users_20251002_201017:INFO:2025-10-02 20:10:17,346:Checking mapped columns ['identifierHash', 'type', 'country', 'language', 'socialNbFollowers', 'socialNbFollows', 'socialProductsLiked', 'productsListed', 'productsSold', 'productsPassRate', 'productsWished', 'productsBought', 'gender', 'civilityGenderId', 'civilityTitle', 'hasAnyApp', 'hasAndroidApp', 'hasIosApp', 'hasProfilePicture', 'daysSinceLastLogin', 'seniority', 'seniorityAsMonths', 'seniorityAsYears', 'countryCode'] are present in dataset columns
+log_users_20251002_201017:INFO:2025-10-02 20:10:17,346:Column validations are done
+log_users_20251002_201017:INFO:2025-10-02 20:10:17,346:Checking the row count on both the dataframes
+log_users_20251002_201017:INFO:2025-10-02 20:10:17,346:No. of records present in source dataframe is : 19783
+log_users_20251002_201017:INFO:2025-10-02 20:10:17,346:No. of records present in target dataframe is : 19783
+log_users_20251002_201017:INFO:2025-10-02 20:10:17,346:Done
+log_users_20251002_201017:INFO:2025-10-02 20:10:17,346:Checking missing primary key(s) between the datasets
+log_users_20251002_201017:INFO:2025-10-02 20:10:17,458:hash key built for both dataframes
+log_users_20251002_201017:INFO:2025-10-02 20:10:17,498:Primary key(s) on both the datasets processed
+log_users_20251002_201017:INFO:2025-10-02 20:10:17,500:Doing the full scan on both the datasets
+log_users_20251002_201017:INFO:2025-10-02 20:10:17,714:hash key built for both dataframes
+log_users_20251002_201017:INFO:2025-10-02 20:10:17,768:Both the datasets are not same

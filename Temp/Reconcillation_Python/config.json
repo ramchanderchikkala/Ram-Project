@@ -1,0 +1,13 @@
+{
+  "batch_name": "recon_run_001",
+  "batch_files": [
+    {
+      "mapping_file_path": "mapping.csv",
+      "source_query": "chunk2.csv",
+      "target_query": "chunk3.csv",
+      "table_name": "users"
+    }
+  ],
+  "max_mismatch_records": 100,
+  "max_match_records": 100
+}
