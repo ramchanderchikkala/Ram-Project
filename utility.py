@@ -86,11 +86,11 @@ def command_execution(source_file: str, destination_file: str, primary_key: str,
 
     # FINAL FIXED COMMAND (no ",")
     cmd_str = (
-    f"{RECON_SCRIPT} "
-    f"-s source/{source_file} "
-    f"-t destination/{destination_file} "
-    f"-k {primary_key} \",\" "
-    f"-H 1"
+        f"{RECON_SCRIPT} "
+        f"-s source/{source_file} "
+        f"-t destination/{destination_file} "
+        f"-k {primary_key} \",\" "
+        f"-H 1"
     )
 
     print(cmd_str)
@@ -99,7 +99,30 @@ def command_execution(source_file: str, destination_file: str, primary_key: str,
     subprocess.run([r"C:/Program Files/Git/bin/bash.exe", "-c", cmd_str])
 
     # Create folder for results
-    create_folder(os.path.join("results", table_name))
+    table_folder = os.path.join("results", table_name)
+    create_folder(table_folder)
+
+    # ---------------------------------------------------------
+    # NEW: Move generated reconciliation files to table folder
+    # ---------------------------------------------------------
+
+    generated_files = [
+        "reconcile_summary.txt",
+        "reconcile_schema_diff.txt",
+        "reconcile_overview.xml",
+        "reconcile_missing_in_target.csv",
+        "reconcile_extra_in_target.csv",
+        "reconcile_mismatched_values.csv",
+        "reconcile_duplicates_source.csv",
+        "reconcile_duplicates_target.csv"
+    ]
+
+    for fname in generated_files:
+        if os.path.exists(fname):
+            shutil.move(fname, os.path.join(table_folder, fname))
+            print(f"Moved: {fname} -> {table_folder}")
+        else:
+            print(f"Missing file (skipped): {fname}")
 
     return "\n" + cmd_str
 
