@@ -19,7 +19,8 @@ table_list = []
 GIT_BASH_PATH = r"C:\Program Files\Git\usr\bin\bash.exe"
 
 # Full Git-Bash style path to your reconcillation.sh
-RECON_SCRIPT = "/c/Users/ramch/My_Computer/Drive_D/CodeBase/Ram-Project/reconcillation.sh"
+#RECON_SCRIPT = "/c/Users/ramch/My_Computer/Drive_D/CodeBase/Ram-Project/reconcillation.sh"
+RECON_SCRIPT = "./reconcillation.sh"
 
 
 def source_file(source_path: str):
@@ -46,10 +47,10 @@ def Primary_file(primary_key_path: str):
             if not line:
                 continue
             result = string_to_dict(line)
-            print("primary_key", result)
+            #print("primary_key", result)
             primary_key_list.append(result)
 
-    print("primary_key_list ::: ", primary_key_list)
+    #print("primary_key_list ::: ", primary_key_list)
     return primary_key_list
 
 
@@ -81,8 +82,7 @@ def create_folder(folder_path: str):
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 def command_execution(source_file: str, destination_file: str, primary_key: str, table_name: str):
-
-    print("Primary Key's ::: ", primary_key)
+    print("Primary Key's    ::: ", primary_key)
 
     # FINAL FIXED COMMAND (no ",")
     cmd_str = (
@@ -96,7 +96,7 @@ def command_execution(source_file: str, destination_file: str, primary_key: str,
     print(cmd_str)
 
     # Execute through Git Bash
-    subprocess.run([r"C:\Program Files\Git\usr\bin\bash.exe", "-c", cmd_str])
+    subprocess.run([r"C:/Program Files/Git/bin/bash.exe", "-c", cmd_str])
 
     # Create folder for results
     create_folder(os.path.join("results", table_name))
@@ -110,10 +110,10 @@ def command_concat(source_file_list, destination_file_list, primary_key_list):
     recon_cmd_str = ""
 
     for source in source_file_list:
-        print("Source File ::: ", source)
+        print("Source File      ::: ", source)
 
         table_name = source.split(".")[0]
-        print("Table Name ::: ", table_name)
+        print("Table Name       ::: ", table_name)
 
         # Check if matching destination exists
         match = find_exact_match(source, destination_file_list)
@@ -125,11 +125,12 @@ def command_concat(source_file_list, destination_file_list, primary_key_list):
         print("Destination File ::: ", destination_file_name)
 
         # Find primary key for the table
-        primary_key_values = None
+        primary_key_values = ""
         for entry in primary_key_list:
             if table_name in entry:
                 primary_key_values = entry[table_name]
-                break
+            else:
+                print(f"No primary key entry for table {table_name} in current entry.")
 
         if not primary_key_values:
             print(f"No primary key found for table {table_name}, skipping.")
