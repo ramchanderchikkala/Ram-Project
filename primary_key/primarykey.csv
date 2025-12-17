@@ -1,1 +1,11 @@
 pubg = Id
+customers = customer_id
+orders = order_id
+products = sku
+order_items = order_item_id
+employees = employee_id
+support_tickets = ticket_id
+sensor_readings = reading_id
+web_events = event_id
+bank_transactions = txn_id
+inventory = inventory_id

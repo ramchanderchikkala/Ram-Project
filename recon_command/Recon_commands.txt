@@ -1,2 +1,12 @@
 
+./reconcillation.sh -s source/bank_transactions.csv -t destination/bank_transactions.csv -k txn_id "," -H 1
+./reconcillation.sh -s source/customers.csv -t destination/customers.csv -k customer_id "," -H 1
+./reconcillation.sh -s source/employees.csv -t destination/employees.csv -k employee_id "," -H 1
+./reconcillation.sh -s source/inventory.csv -t destination/inventory.csv -k inventory_id "," -H 1
+./reconcillation.sh -s source/orders.csv -t destination/orders.csv -k order_id "," -H 1
+./reconcillation.sh -s source/order_items.csv -t destination/order_items.csv -k order_item_id "," -H 1
+./reconcillation.sh -s source/products.csv -t destination/products.csv -k sku "," -H 1
 ./reconcillation.sh -s source/pubg.csv -t destination/pubg.csv -k Id "," -H 1
+./reconcillation.sh -s source/sensor_readings.csv -t destination/sensor_readings.csv -k reading_id "," -H 1
+./reconcillation.sh -s source/support_tickets.csv -t destination/support_tickets.csv -k ticket_id "," -H 1
+./reconcillation.sh -s source/web_events.csv -t destination/web_events.csv -k event_id "," -H 1

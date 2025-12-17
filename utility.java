@@ -3,7 +3,6 @@ import java.nio.file.*;
 import java.util.*;
 import java.util.regex.*;
 import java.time.*;
-import java.time.format.DateTimeFormatter;
 
 public class utility {
 
@@ -14,8 +13,7 @@ public class utility {
     static List<String> table_list = new ArrayList<>();
 
     // CONFIGURATION SECTION
-    static String GIT_BASH_PATH = "C:/Program Files/Git/bin/bash.exe";
- 
+    static String GIT_BASH_PATH = "C:\\Program Files\\Git\\bin\\bash.exe";
     static String RECON_SCRIPT = "./reconcillation.sh";
 
     // --------------------------------------------------------
@@ -52,6 +50,7 @@ public class utility {
 
         try (BufferedReader br = new BufferedReader(new FileReader(primary_key_path))) {
             String line;
+
             while ((line = br.readLine()) != null) {
                 line = line.strip();
                 if (line.isEmpty()) continue;
@@ -137,17 +136,51 @@ public class utility {
 
             Process process = pb.start();
             BufferedReader r = new BufferedReader(new InputStreamReader(process.getInputStream()));
+
             String line;
             while ((line = r.readLine()) != null) {
                 System.out.println(line);
             }
-            process.waitFor();
 
+            process.waitFor();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        create_folder("results/" + table_name);
+        // Create folder for results
+        String table_folder = "results/" + table_name;
+        create_folder(table_folder);
+
+        // ---------------------------------------------------------
+        // NEW: Move reconciliation output files into the table folder
+        // ---------------------------------------------------------
+        List<String> generated_files = Arrays.asList(
+                "reconcile_summary.txt",
+                "reconcile_schema_diff.txt",
+                "reconcile_overview.xml",
+                "reconcile_missing_in_target.csv",
+                "reconcile_extra_in_target.csv",
+                "reconcile_mismatched_values.csv",
+                "reconcile_duplicates_source.csv",
+                "reconcile_duplicates_target.csv"
+        );
+
+        for (String fname : generated_files) {
+            File f = new File(fname);
+
+            if (f.exists()) {
+                File dest = new File(table_folder + "/" + fname);
+                try {
+                    Files.move(f.toPath(), dest.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                    System.out.println("Moved: " + fname + " -> " + table_folder);
+                } catch (IOException e) {
+                    System.out.println("Failed to move: " + fname);
+                    e.printStackTrace();
+                }
+            } else {
+                System.out.println("Missing file (skipped): " + fname);
+            }
+        }
 
         return "\n" + cmd_str;
     }
@@ -184,7 +217,7 @@ public class utility {
                 if (entry.containsKey(table_name)) {
                     primary_key_values = entry.get(table_name);
                 } else {
-                    System.out.println("No primary key entry for table " + table_name + " in current entry.");
+                    System.out.println("No primary key entry for table " + table_name + " in this entry.");
                 }
             }
 
@@ -202,7 +235,7 @@ public class utility {
     }
 
     // --------------------------------------------------------
-    //  main_program  (Python main)
+    //  main_program
     // --------------------------------------------------------
     public static void main_program() {
 
@@ -230,7 +263,7 @@ public class utility {
     }
 
     // --------------------------------------------------------
-    //  clean folder logic
+    //  clean folders
     // --------------------------------------------------------
     public static void cleanFolder(String path) {
         try {
@@ -252,7 +285,7 @@ public class utility {
     }
 
     // --------------------------------------------------------
-    //  Java main = Python __main__
+    //  main
     // --------------------------------------------------------
     public static void main(String[] args) {
 
